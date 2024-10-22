@@ -1,7 +1,9 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.IO;
 using System.Runtime.InteropServices;
+using UnityEngine.Networking;
 using Application = UnityEngine.Application;
 
 public class TrayIconManager : MonoBehaviour
@@ -48,21 +50,18 @@ public class TrayIconManager : MonoBehaviour
     //Path to the icon file
     [Header("Settings")]
     [SerializeField] private string hoverTooltipText = "Desktop Calendar\n \nPress to open settings menu";
-
+    
     //Delegate for handling window messages
     private delegate IntPtr WndProcDelegate(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-    private void Start()
+    private IEnumerator Start()
     {
         string iconPath = Application.persistentDataPath + "/icon.ico";
-        
-        //Save ico file to persistentDataPath
-        if (!File.Exists(iconPath))
+        WaitForSecondsRealtime delay = HelperFunctions.GetWaitRealTime(0.5f);
+
+        while (!File.Exists(iconPath))
         {
-            TextAsset icoData = Resources.Load<TextAsset>("icon");
-            Debug.Log(icoData);
-            Debug.Log(icoData.bytes);
-            File.WriteAllBytes(iconPath, icoData.bytes);
+            yield return delay;
         }
         
         //Create the NotifyIconData

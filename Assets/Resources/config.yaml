@@ -1,0 +1,7 @@
+#Monitor settings
+monitor_index: 1
+monitor_resolution_width: 1080
+monitor_resolution_height: 1920
+
+#Google Calendar settings
+calendar_embed: null

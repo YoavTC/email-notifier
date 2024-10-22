@@ -878,6 +878,8 @@ GameObject:
   - component: {fileID: 1102309155}
   - component: {fileID: 1102309157}
   - component: {fileID: 1102309158}
+  - component: {fileID: 1102309159}
+  - component: {fileID: 1102309160}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -924,7 +926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc22693e8fea1844b0e2577ccd74116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconFilePath: /Icons/icon.ico
   hoverTooltipText: "Desktop Calendar\n \nPress to open settings menu"
 --- !u!114 &1102309158
 MonoBehaviour:
@@ -943,6 +944,31 @@ MonoBehaviour:
   quitApplicationButton: {fileID: 0}
   hideApplicationButton: {fileID: 0}
   debugText: {fileID: 1462787501}
+--- !u!114 &1102309159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102309154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26acb32a6111912418ccccbd7df87cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icoFileUrl: https://raw.githubusercontent.com/YoavTC/email-notifier/refs/heads/main/Assets/Resources/icon.ico
+--- !u!114 &1102309160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102309154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda3ba3f88aeaf849976a314e703f0bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1160980154
 GameObject:
   m_ObjectHideFlags: 0
