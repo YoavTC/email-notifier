@@ -26,7 +26,7 @@ public class WindowInitializer : MonoBehaviour
         int monitorHeight = display.systemHeight;
 
         int xOffset = GetXOffset(index);
-        int yOffset = 0;
+        int yOffset = -10000000;
 
         IntPtr hWnd = GetActiveWindow();
         

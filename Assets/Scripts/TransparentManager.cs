@@ -16,6 +16,9 @@ public class TransparentManager : MonoBehaviour
     
     [DllImport("Dwmapi.dll")]
     private static extern uint DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS margins);
+    
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
     #endregion
     
     //Constants for window style settings operations
@@ -24,7 +27,12 @@ public class TransparentManager : MonoBehaviour
     private const uint WS_EX_LAYERED = 0x00080000;
     private const uint WS_EX_TOOLWINDOW = 0x00000080;
     private const uint WS_EX_APPWINDOW = 0x00040000;
-    // private const uint WS_EX_TRANSPARENT = 0x00000020;
+    private const uint SWP_NOSIZE = 0x0001;
+    private const uint SWP_NOMOVE = 0x0002;
+    private const uint SWP_SHOWWINDOW = 0x0040;
+    private const uint WS_EX_NOACTIVATE = 0x08000000;
+    
+    private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
 
     void Start()
     {
@@ -39,6 +47,7 @@ public class TransparentManager : MonoBehaviour
         #if !UNITY_EDITOR
         MakeWindowClickThrough(hWnd);
         #endif
+        MakeWindowStayAtBottom(hWnd);
     }
 
     private void MakeWindowTransparent(IntPtr hWnd)
@@ -57,6 +66,18 @@ public class TransparentManager : MonoBehaviour
         SetWindowLong(hWnd, GWL_EXSTYLE, style);
         SetLayeredWindowAttributes(hWnd, 0, 0, LWA_COLORKEY);
     }
+    
+    private void MakeWindowStayAtBottom(IntPtr hWnd)
+    {
+        // Keep the window always at the bottom of the Z-order and prevent activation
+        SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_SHOWWINDOW);
+
+        // Modify the window style to prevent it from being activated (popping to the top)
+        int style = GetWindowLong(hWnd, GWL_EXSTYLE);
+        style |= (int)(WS_EX_LAYERED | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE); // Add WS_EX_NOACTIVATE to prevent bringing the window to the front
+        SetWindowLong(hWnd, GWL_EXSTYLE, style);
+    }
+
     
     private struct MARGINS {public int cxLeftWidth; public int cxRightWidth; public int cyTopHeight; public int cyBottomHeight;}
 }
