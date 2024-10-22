@@ -41,13 +41,13 @@ public class TransparentManager : MonoBehaviour
         Application.runInBackground = true;
         QualitySettings.vSyncCount = 0;
         //Application.targetFrameRate = (int) Screen.currentResolution.refreshRateRatio.value;
-        Application.targetFrameRate = 24;
         
-        MakeWindowTransparent(hWnd);
         #if !UNITY_EDITOR
+        Application.targetFrameRate = 24;
+        MakeWindowTransparent(hWnd);
         MakeWindowClickThrough(hWnd);
-        #endif
         MakeWindowStayAtBottom(hWnd);
+        #endif
     }
 
     private void MakeWindowTransparent(IntPtr hWnd)

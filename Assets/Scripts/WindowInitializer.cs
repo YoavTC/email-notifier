@@ -14,8 +14,10 @@ public class WindowInitializer : MonoBehaviour
     
     void Start()
     {
+        #if !UNITY_EDITOR
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
         SetMonitor(2);
+        #endif
     }
     
     private void SetMonitor(int index)
