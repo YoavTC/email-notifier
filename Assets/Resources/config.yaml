@@ -4,4 +4,4 @@ monitor_resolution_width: 1080
 monitor_resolution_height: 1920
 
 #Google Calendar settings
-calendar_embed: null
+calendar_key: "null"

@@ -28,11 +28,6 @@ public class UIManager : Singleton<UIManager>
         Application.Quit();
     }
     
-    public void OnHideButtonClick()
-    {
-        
-    }
-    
     public void OnOpenSettingsFileButtonClick()
     {
         Process.Start("notepad.exe", Application.persistentDataPath + "/config.yaml");
